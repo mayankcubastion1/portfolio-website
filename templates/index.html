@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>{{ data.name }} — Portfolio</title>
   <meta name="description" content="{{ data.title }}" />
+  <meta property="og:title" content="{{ data.name }} — Portfolio" />
+  <meta property="og:description" content="{{ data.title }}" />
+  <link rel="preconnect" href="https://unpkg.com" />
   <link rel="stylesheet" href="/static/css/style.css" />
   <!-- Three.js CDN (no bundler needed) -->
   <script defer src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
@@ -17,6 +20,7 @@
   <header class="nav">
     <div class="brand">MS</div>
     <nav>
+      <a href="#about">About</a>
       <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
       <a href="#skills">Skills</a>
@@ -40,6 +44,12 @@
         {% if data.contact.portfolio %}<a class="pill" target="_blank" rel="noopener noreferrer" href="{{ data.contact.portfolio }}">Portfolio</a>{% endif %}
       </div>
       <a class="cta" href="#projects">Explore my work →</a>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="screen">
+      <h2>About</h2>
+      <p class="lead">{{ data.summary }}</p>
     </section>
 
     <!-- EXPERIENCE -->

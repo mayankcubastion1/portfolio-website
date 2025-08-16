@@ -1,10 +1,16 @@
 from flask import Flask, render_template
+from flask_compress import Compress
 
 app = Flask(__name__)
+Compress(app)
 
 resume = {
     "name": "Mayank Sharma",
     "title": "Machine Learning & Generative AI Engineer",
+    "summary": (
+        "Engineer delivering reliable AI systems and performant web apps for "
+        "enterprise environments."
+    ),
     "contact": {
         "email": "mayanksharma.cbs@gmail.com",
         "phone": "+91-8800460941",
@@ -117,6 +123,12 @@ resume = {
 @app.route("/")
 def index():
     return render_template("index.html", data=resume)
+
+
+@app.after_request
+def add_header(response):
+    response.headers["Cache-Control"] = "public, max-age=3600"
+    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
