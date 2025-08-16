@@ -2,6 +2,11 @@
 
 A minimal Flask + Three.js portfolio showcasing projects and experience with a dynamic 3D torus knot background and starfield.
 
+## Features
+
+- Responsive hero, about, and project sections fed by a single Python resume file.
+- Compressed responses and cache headers via `Flask-Compress` for faster loads.
+
 ## Run locally
 
 ```bash
@@ -23,3 +28,7 @@ static/
   js/
     main.js
 ```
+
+## License
+
+Released under the [MIT License](LICENSE) © 2024 Mayank Sharma.
