@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{{ data.name }} — Portfolio</title>
+  <meta name="description" content="{{ data.title }}" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+  <!-- Three.js CDN (no bundler needed) -->
+  <script defer src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+</head>
+<body>
+  <!-- 3D Canvas Background -->
+  <canvas id="bg" aria-hidden="true"></canvas>
+
+  <!-- Top Nav -->
+  <header class="nav">
+    <div class="brand">MS</div>
+    <nav>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
+      <a href="#certs">Certs</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <!-- Sections -->
+  <main>
+    <!-- HERO -->
+    <section class="screen hero">
+      <h1>{{ data.name }}</h1>
+      <p class="subtitle">{{ data.title }}</p>
+      <div class="pills">
+        <a class="pill" href="mailto:{{ data.contact.email }}">{{ data.contact.email }}</a>
+        <span class="pill">{{ data.contact.phone }}</span>
+        {% if data.contact.linkedin %}<a class="pill" target="_blank" rel="noopener noreferrer" href="{{ data.contact.linkedin }}">LinkedIn</a>{% endif %}
+        {% if data.contact.github %}<a class="pill" target="_blank" rel="noopener noreferrer" href="{{ data.contact.github }}">GitHub</a>{% endif %}
+        {% if data.contact.portfolio %}<a class="pill" target="_blank" rel="noopener noreferrer" href="{{ data.contact.portfolio }}">Portfolio</a>{% endif %}
+      </div>
+      <a class="cta" href="#projects">Explore my work →</a>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="screen">
+      <h2>Experience</h2>
+      <div class="grid">
+        {% for exp in data.experience %}
+        <article class="card">
+          <header class="card-head">
+            <h3>{{ exp.company }}</h3>
+            <span class="muted">{{ exp.period }}</span>
+          </header>
+          <div class="muted">{{ exp.location }} • {{ exp.role }}</div>
+          <ul>
+            {% for b in exp.bullets %}<li>{{ b }}</li>{% endfor %}
+          </ul>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="screen">
+      <h2>Projects</h2>
+      <div class="grid">
+        {% for p in data.projects %}
+        <article class="card grad">
+          <header class="card-head">
+            <h3>{{ p.title }}</h3>
+            <span class="badge">{{ p.year }}</span>
+          </header>
+          <p>{{ p.desc }}</p>
+          <div class="pills">
+            {% for s in p.stack %}<span class="pill">{{ s }}</span>{% endfor %}
+          </div>
+          <div class="links">
+            {% for k, v in p.links.items() %}
+              {% if v %}<a target="_blank" rel="noopener noreferrer" href="{{ v }}">{{ k|capitalize }}</a>{% endif %}
+            {% endfor %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="screen">
+      <h2>Skills</h2>
+      <div class="grid">
+        {% for cat, items in data.skills.items() %}
+        <article class="card">
+          <h3>{{ cat }}</h3>
+          <div class="pills">
+            {% for it in items %}<span class="pill">{{ it }}</span>{% endfor %}
+          </div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="screen">
+      <h2>Education</h2>
+      <div class="grid">
+        {% for e in data.education %}
+        <article class="card">
+          <h3>{{ e.school }}</h3>
+          <div class="muted">{{ e.location }}</div>
+          <div>{{ e.degree }}</div>
+          <div class="muted small">{{ e.years }}</div>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- CERTS -->
+    <section id="certs" class="screen">
+      <h2>Licences & Certifications</h2>
+      <div class="grid">
+        {% for c in data.certs %}
+        <article class="card"><div>{{ c }}</div></article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="screen">
+      <h2>Let’s build something</h2>
+      <div class="cta-row">
+        <div>
+          <div class="lead">Available for freelance & full‑time roles</div>
+          <div class="muted">Based in India · Open to remote</div>
+        </div>
+        <div class="buttons">
+          <a class="btn" href="mailto:{{ data.contact.email }}">Email me</a>
+          <a class="btn outline" href="#experience">See experience</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script defer src="/static/js/main.js"></script>
+</body>
+</html>
